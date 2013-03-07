@@ -16,16 +16,19 @@ describe Tweet do
 
   describe "when scrape is not present" do
     before { @tweet.tap {|qq| qq.miner = nil}}
-      it {should_not be_valid}
+
+    it {should_not be_valid}
   end
 
   describe "when length of description is greater than 140" do
     before { @tweet.description = "a"*141 }
-      it {should_not be_valid}
+
+    it {should_not be_valid}
   end
 
   describe "when length of description is less than 1" do
     before {@tweet.description = ""}
-      it {should_not be_valid}
+
+    it {should_not be_valid}
   end
 end
