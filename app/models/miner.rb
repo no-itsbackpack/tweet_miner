@@ -1,3 +1,4 @@
 class Miner < ActiveRecord::Base
-  attr_accessible :link
+  has_many :tweets
+  attr_accessible :url
 end

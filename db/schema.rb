@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(:version => 20130307210943) do
 
   create_table "miners", :force => true do |t|
-    t.string   "link"
+    t.string   "url"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

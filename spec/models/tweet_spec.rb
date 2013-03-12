@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+ 
 describe Tweet do
   before :each do
     miner = Miner.create

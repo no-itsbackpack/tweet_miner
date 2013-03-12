@@ -1,7 +1,7 @@
 class SetupDatabase < ActiveRecord::Migration
   def up
     create_table :miners do |t|
-      t.string :link
+      t.string :url
       t.timestamps
     end
 
