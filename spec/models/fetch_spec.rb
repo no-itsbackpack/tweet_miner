@@ -28,15 +28,15 @@ describe Fetch do
     it 'should have xpath //items with children nodes' do
     end
 
-    it 'should have xpath '//items' with '/author' as one of its children nodes' do
+    it 'should have xpath //items with /author as one of its children nodes' do
     end
 
-    it 'should have xpath '//items' with '/title' as one of its children nodes' do
+    it 'should have xpath //items with /title as one of its children nodes' do
     end
 
-    it 'should have xpath '//items' with '/description' as one of its children nodes' do 
+    it 'should have xpath //items with /description as one of its children nodes' do 
     end
-    
+
   end
 
 end
