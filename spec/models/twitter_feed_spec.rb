@@ -1,5 +1,5 @@
 require 'spec_helper'
- puts Dir.pwd
+
 describe TwitterFeed do
   before :each do
     @twitterfeed = TwitterFeed.new('http://search.twitter.com/search.rss?q=quickquid')
