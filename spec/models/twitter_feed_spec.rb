@@ -1,5 +1,4 @@
 require 'spec_helper'
-
 describe TwitterFeed do
   before :each do
     @twitterfeed = TwitterFeed.new('http://search.twitter.com/search.rss?q=quickquid')
@@ -52,6 +51,8 @@ describe TwitterFeed do
       @twitterfeed.extract_tweets_from_xml(@xml_doc).each do |hash|
         hash.keys.count.should be_eql(2)
         hash.keys.should include(:description, :author)
+        hash[:author].should_not be_nil
+        hash[:description].should_not be_nil
       end
     end
   end

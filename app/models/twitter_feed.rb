@@ -20,7 +20,7 @@ class TwitterFeed
   end
 
   def extract_tweets_from_xml(xml_doc)
-    xml_doc.class == Nokogiri::XML::Document ? xml_doc.xpath('//item').select {|i| i.xpath('author').inner_text != "QuickQuid@twitter.com (QuickQuid)"}.map{|i| {:description => i.xpath('description').inner_text, :author => i.xpath('author').inner_text}} : []
+    xml_doc.class == Nokogiri::XML::Document ? xml_doc.xpath('//item').select {|i| i.xpath('author').inner_text != "QuickQuid@twitter.com (QuickQuid)"}.map{|i| {:description => i.xpath('title').inner_text, :author => i.xpath('author').inner_text}} : []
   end
 
   def get_tweets_attrs

@@ -1,11 +1,13 @@
-class Miner < ActiveRecord::Base
+class Miner 
   require 'twitter_feed'
-  has_many :tweets
-  attr_accessible :url
+  attr_accessor  :url
 
+  def initialize(url)
+    @url = url
+  end
 
   def mine_tweets
-    twitterfeed = TwitterFeed.new(url)
+    twitterfeed = TwitterFeed.new(@url)
     tweets_attrs = twitterfeed.get_tweets_attrs
     save_tweets(tweets_attrs)
   end
@@ -15,10 +17,10 @@ class Miner < ActiveRecord::Base
 
   def save_tweets(tweets_attrs)
     tweets_attrs.each do |tweet_attrs|
-      description = tweet_attrs[:title]
+      description = tweet_attrs[:description]
       author  = tweet_attrs[:author]
 
-      Tweet.create(:description => description, :author=>author, :miner => self) #if author != "QuickQuid@twitter.com (QuickQuid)"
+      Tweet.create(:description => description, :author=>author) #if author != "QuickQuid@twitter.com (QuickQuid)"
     end 
   end
 
