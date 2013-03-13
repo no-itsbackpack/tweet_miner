@@ -1,4 +1,5 @@
 class Miner < ActiveRecord::Base
+  require 'twitter_feed'
   has_many :tweets
   attr_accessible :url
 
@@ -14,8 +15,6 @@ class Miner < ActiveRecord::Base
 
   def save_tweets(tweets_attrs)
     tweets_attrs.each do |tweet_attrs|
-      #description = tweet_attr.xpath('title').inner_text
-      #author  = tweet_attr.xpath('author').inner_text
       description = tweet_attrs[:title]
       author  = tweet_attrs[:author]
 

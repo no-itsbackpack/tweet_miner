@@ -117,6 +117,8 @@ GEM
     rspec-xml (0.0.6)
       nokogiri
       rspec
+    rufus-scheduler (2.0.18)
+      tzinfo (>= 0.3.23)
     sass (3.2.6)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -153,6 +155,7 @@ DEPENDENCIES
   rails (= 3.2.11)
   rspec-rails
   rspec-xml
+  rufus-scheduler
   sass-rails (~> 3.2.3)
   sqlite3
   turn
