@@ -1,7 +1,7 @@
 require 'spec_helper'
 describe TwitterFeed do
   before :each do
-    @twitterfeed = TwitterFeed.new('http://search.twitter.com/search.rss?q=quickquid')
+    @twitterfeed = TwitterFeed.new('http://search.twitter.com/search.rss?q=quickquid&rpp=20')
 
     @xml_doc = Nokogiri::XML(File.open(File.dirname(__FILE__) + "/Twitter.xml"))
   end

@@ -16,13 +16,14 @@ class Miner
   private 
 
   def save_tweets(tweets_attrs)
-    tweets_attrs.each do |tweet_attrs|
-      description = tweet_attrs[:description]
-      author  = tweet_attrs[:author]
-
-      Tweet.create(:description => description, :author=>author) #if author != "QuickQuid@twitter.com (QuickQuid)"
+    tweets_attrs.each do |tweet_attr|
+      if uniq_tweet?(tweet_attr)
+        Tweet.create(:description => tweet_attr[:description], :author=> tweet_attr[:author])
+      end
     end 
   end
 
-
+  def uniq_tweet?(tweet_attr)
+    return Tweet.find_by_author_and_description(tweet_attr[:author],tweet_attr[:description]).nil?
+  end
 end
