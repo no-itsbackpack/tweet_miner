@@ -8,22 +8,22 @@ class Miner
 
   def mine_tweets
     twitterfeed = TwitterFeed.new(@url)
-    tweets_attrs = twitterfeed.get_tweets_attrs
-    save_tweets(tweets_attrs)
+    tweets = twitterfeed.get_tweets
+    save_tweets(tweets)
   end
 
 
   private 
 
-  def save_tweets(tweets_attrs)
-    tweets_attrs.each do |tweet_attr|
-      if uniq_tweet?(tweet_attr)
-        Tweet.create(:description => tweet_attr[:description], :author=> tweet_attr[:author])
+  def save_tweets(tweets)
+    tweets.each do |tweet|
+      if !tweet_exists?(tweet)
+        Tweet.create(:description => tweet[:description], :author=> tweet[:author])
       end
     end 
   end
 
-  def uniq_tweet?(tweet_attr)
-    return Tweet.find_by_author_and_description(tweet_attr[:author],tweet_attr[:description]).nil?
+  def tweet_exists?(tweet)
+    Tweet.exists?(:author => tweet[:author], :description => tweet[:description])
   end
 end

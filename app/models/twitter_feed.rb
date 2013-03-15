@@ -4,30 +4,32 @@ class TwitterFeed
   require 'net/http'
   require 'nokogiri'
 
-
-  def initialize(url)
-    @url = url
+  def get_tweets
+    response = request_feed
+    data  = extract_data_from_feed(response.body)
+    tweets   = extract_tweets(data)
   end
 
-  def request_twitter_feed
-    uri = URI.parse(@url)
+  private
+
+  def request_feed(url)
+    uri = URI.parse(url)
     response = Net::HTTP.get_response(uri)
-    return response
   end
 
-  def extract_xml_from_twitter_feed(feed)
+  def extract_data_from_feed(feed)
     Nokogiri::XML(feed)
   end
 
-  def extract_tweets_from_xml(xml_doc)
-    xml_doc.class == Nokogiri::XML::Document ? xml_doc.xpath('//item').select {|i| i.xpath('author').inner_text != "QuickQuid@twitter.com (QuickQuid)"}.map{|i| {:description => i.xpath('title').inner_text, :author => i.xpath('author').inner_text}} : []
+  def extract_tweets(data)
+    return [] if data.empty?
+    tweets = data.xpath('//item')
+    tweets = remove_invalid_authors(tweets)
+    tweets.map{|i| {:description => i.xpath('title').inner_text, :author => i.xpath('author').inner_text}}
   end
 
-  def get_tweets_attrs
-    response = request_twitter_feed
-    xml_doc  = extract_xml_from_twitter_feed(response.body)
-    tweets   = extract_tweets_from_xml(xml_doc)
-    return tweets 
+  def remove_invalid_authors(data)
+    data.select {|i| i.xpath('author').inner_text != "QuickQuid@twitter.com (QuickQuid)"}
   end
 
 end
