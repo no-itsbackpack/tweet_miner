@@ -1,5 +1,4 @@
 class TwitterFeed
-  attr_accessor :url
   require 'open-uri'
   require 'net/http'
   require 'nokogiri'
@@ -9,7 +8,7 @@ class TwitterFeed
     data  = extract_data_from_feed(response.body)
     tweets   = extract_tweets(data)
   end
-
+ 
   private
 
   def request_feed(url)
@@ -22,9 +21,8 @@ class TwitterFeed
   end
 
   def extract_tweets(data)
-    return [] if data.empty?
-    tweets = data.xpath('//item')
-    tweets = remove_invalid_authors(tweets)
+    items = data.xpath('//item')
+    tweets = remove_invalid_authors(items)
     tweets.map{|i| {:description => i.xpath('title').inner_text, :author => i.xpath('author').inner_text}}
   end
 
