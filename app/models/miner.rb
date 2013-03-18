@@ -7,8 +7,8 @@ class Miner
   end
 
   def mine_tweets
-    twitterfeed = TwitterFeed.new(@url)
-    tweets = twitterfeed.get_tweets
+    twitterfeed = TwitterFeed.new
+    tweets = twitterfeed.get_tweets(url)
     save_tweets(tweets)
   end
 
